@@ -149,7 +149,7 @@ private:
     MaybeLocal<Value> value = Nan::Get(obj, Nan::New<String>(name).ToLocalChecked());
 
     if (!value.IsEmpty() && value.ToLocalChecked()->IsNumber()) {
-      return Nan::New<v8::Boolean>(value.ToLocalChecked());
+      return value.ToLocalChecked()->Int32Value(Nan::GetCurrentContext()).FromJust();
     }
 
     return 0;
@@ -160,7 +160,7 @@ private:
     MaybeLocal<Value> value = Nan::Get(obj, Nan::New<String>(name).ToLocalChecked());
 
     if (!value.IsEmpty() && value.ToLocalChecked()->IsBoolean()) {
-      return NaN::value.ToLocalChecked()->BooleanValue(v8::Isolate::GetCurrent()).FromJust();
+      return Nan::New<v8::Boolean>(value.ToLocalChecked());
     }
 
     return false;
